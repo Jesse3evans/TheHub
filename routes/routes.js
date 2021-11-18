@@ -40,7 +40,7 @@ exports.createUser = async (req, res) => {
 };
 
 exports.userProfile = (req, res) => {
-
+    res.render('userProfile')
 }
 
 exports.feed = (req, res) => {
