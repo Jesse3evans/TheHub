@@ -1,0 +1,25 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Create User
+  link(rel='stylesheet' type='text/css' href='/styles.css')
+  script(src='js/nav2.js')
+#fixed-header
+  img#logo(src='https://th.bing.com/th/id/R.b8a297af7bc9f50434b64ac1241012f4?rik=1zp6m%2brTeRMSaw&riu=http%3a%2f%2fstatic1.squarespace.com%2fstatic%2f59834fee6f4ca39f8397a21e%2ft%2f59b95550b1ffb69891e9ab5d%2f1505318229028%2fThe%2bHub-01.png%3fformat%3d1500w&ehk=X3H6fLY4E6%2bQeMtExFWNKo5PBSer99ci4FRt8r%2f4Dg4%3d&risl=&pid=ImgRaw&r=0')
+#content(style='top:10vw;height:75vw')
+  #margin-box(style='height:60vw')
+    #addForm(style='position:relative;top:5vw;left:18vw; overflow-y: hidden;')
+      form
+        h1 Username
+        input#username(type='text')
+        h1 Password
+        input#password(type='text')
+        h1 Display Name
+        input#displayName(type='text')
+        h1 Select Your Profile Picture
+        input#newUserProfilePic(type='file' value='select file')
+        a(style='text-decoration: none;' href='/login')
+        input#submit(type="submit"value="submit") 
+        
+  footer
+    h1 The Hub - Powered by the plug

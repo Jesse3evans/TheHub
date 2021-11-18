@@ -1,0 +1,64 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title Profile - Layout
+  link(rel='stylesheet' type='text/css' href='/styles.css')
+  script(src='js/nav2.js')
+#menu
+  nav
+    img#profilePic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
+    li#link1
+      span#dash1 -
+      a(href='') Profile
+    li#link1
+      span#dash1 -
+      a(href='') Make Post
+    li#link1
+      span#dash1 -
+      a(href='') Settings
+#opener(onmouseover='openMenu()')
+#full-overlay(onmouseover='closeMenu()')
+#fixed-header
+  img#logo(src='https://th.bing.com/th/id/R.b8a297af7bc9f50434b64ac1241012f4?rik=1zp6m%2brTeRMSaw&riu=http%3a%2f%2fstatic1.squarespace.com%2fstatic%2f59834fee6f4ca39f8397a21e%2ft%2f59b95550b1ffb69891e9ab5d%2f1505318229028%2fThe%2bHub-01.png%3fformat%3d1500w&ehk=X3H6fLY4E6%2bQeMtExFWNKo5PBSer99ci4FRt8r%2f4Dg4%3d&risl=&pid=ImgRaw&r=0')
+  p#welcome-text Welcome, User
+  img#profilePic0(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
+#profile-cover
+  h1 My Post&apos;s
+  #profileInfo
+    img#profilePic(style='position:relative;left:17vw;top:-2vw;' src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
+    p(style='position:relative;left:22vw;top:-2vw;  font-size:1vw;') @Username
+    p(style='position:relative;left:22vw;top:-2vw; font-size:1vw;') Friends - 90
+    p
+    #statusMsg
+      p New User hello hit my board 
+      p
+  #content(style='top:50vw')
+    #margin-box
+      #post-header
+        h1 Post - Title
+        p Date:
+      #post
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi labore eveniet, fuga sed eum voluptatum autem architecto quod nobis porro numquam minima hic sit qui. Illo tempore reprehenderit ad saepe?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem sapiente incidunt unde illum sequi eaque, amet perferendis facere vitae fugiat eos? Nostrum atque rerum aliquid repellendus quibusdam necessitatibus inventore optio.
+      #post-header
+        h1 Post - Title
+        p Date:
+      #post
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi labore eveniet, fuga sed eum voluptatum autem architecto quod nobis porro numquam minima hic sit qui. Illo tempore reprehenderit ad saepe?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem sapiente incidunt unde illum sequi eaque, amet perferendis facere vitae fugiat eos? Nostrum atque rerum aliquid repellendus quibusdam necessitatibus inventore optio.
+      #post-header
+        h1 Post - Title
+        p Date:
+      #post
+        p
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi labore eveniet, fuga sed eum voluptatum autem architecto quod nobis porro numquam minima hic sit qui. Illo tempore reprehenderit ad saepe?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem sapiente incidunt unde illum sequi eaque, amet perferendis facere vitae fugiat eos? Nostrum atque rerum aliquid repellendus quibusdam necessitatibus inventore optio.
+      #post-links
+        // figure out ay to limit links showing upon post amount
+        | More Post: 
+        a(href='') 1
+        a(href='') 2
+        a(href='') 3
+        a(href='') 4
+        a(href='') 5
+    footer
+      h1 The Hub - Powered by the plug
