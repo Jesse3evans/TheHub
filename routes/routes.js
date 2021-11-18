@@ -17,7 +17,7 @@ exports.logout = (req, res) => {
 }
 
 exports.createUser = (req, res) => {
-
+    res.render('createUser')
 }
 
 exports.userProfile = (req, res) => {

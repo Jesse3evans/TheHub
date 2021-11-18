@@ -28,6 +28,7 @@ const checkAuth = (req, res, next) => {
     }
 }
 
-app.get('/login', routes.login);
+app.get('/', routes.login);
+app.get('/create', routes.createUser);
 
 app.listen(3000);
