@@ -27,4 +27,6 @@ const checkAuth = (req, res, next) => {
     }
 }
 
+app.get('/', routes.login);
+
 app.listen(3000);

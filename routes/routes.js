@@ -7,3 +7,7 @@ const client = new MongoClient(url);
 const dbName = 'Userbase';
 const db = client.db(dbName);
 const collection = db.collection('Users');
+
+exports.login = (req, res) => {
+    res.render('login')
+}
