@@ -22,9 +22,22 @@ exports.logout = (req, res) => {
     })
 }
 
-exports.createUser = (req, res) => {
-    res.render('createUser')
+exports.create = (req, res) => {
+    res.render('create')
 }
+
+exports.createUser = async (req, res) => {
+    await client.connect();
+    let person = {
+        name: req.body.username,
+        password: req.body.password,
+        display: req.body.displayName,
+        image: req.body.profilePic
+    }
+    const insertResult = await collection.insertOne(person);
+    client.close();
+    res.redirect('/');
+};
 
 exports.userProfile = (req, res) => {
 
