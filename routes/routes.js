@@ -11,3 +11,19 @@ const collection = db.collection('Users');
 exports.login = (req, res) => {
     res.render('login')
 }
+
+exports.logout = (req, res) => {
+
+}
+
+exports.createUser = (req, res) => {
+
+}
+
+exports.userProfile = (req, res) => {
+
+}
+
+exports.feed = (req, res) => {
+    
+}
