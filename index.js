@@ -1,5 +1,6 @@
 const express = require('express');
 const pug = require('pug');
+const path = require('path');
 const expressSession = require('express-session');
 const routes = require('./routes/routes.js');
 
