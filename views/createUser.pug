@@ -9,7 +9,7 @@ head
 #content(style='top:10vw;height:75vw')
   #margin-box(style='height:60vw')
     #addForm(style='position:relative;top:5vw;left:18vw; overflow-y: hidden;')
-      form
+      form(action="/createUser" method="post")
         h1 Username
         input#username(type='text')
         h1 Password
