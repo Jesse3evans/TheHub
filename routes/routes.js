@@ -18,8 +18,7 @@ exports.login = (req, res) => {
 exports.loginAuth = async (req, res) => {
     await client.connect();
 
-
-    const filteredDocs = await collection.findOne({username: req.body.username}).toArray();
+    const filteredDocs = await users.findOne({username: req.body.username}).toArray();
 
     let hash = filteredDocs.password;
     if ((req.body.username && req.body.password) == (filteredDocs.username && bcrypt.compareSync(req.body.password, hash))) {
