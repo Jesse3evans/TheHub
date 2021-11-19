@@ -42,7 +42,13 @@ exports.logout = (req, res) => {
     })
 }
 exports.feed = (req, res) => {
-
+    await client.connect();
+    const findResult = await posts.find({}).toArray().limit(6);
+    console.log('Found documents => ', findResult);
+    client.close();
+    res.render('feed', {
+        postArray: findResult
+    });
 }
 
 
@@ -76,7 +82,6 @@ exports.userProfile = async (req, res) => {
     res.render('userProfile', {
         user: filteredDocs
     });
-    console.log(filteredDocs)
 };
 
 
