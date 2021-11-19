@@ -1,4 +1,4 @@
-const { MongoClient, ObjectId }= require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 const bcrypt = require('bcryptjs');
 
 const url = 'mongodb+srv://ADMIN:Neumont@thehubusers.2xiyk.mongodb.net/Userbase?retryWrites=true&w=majority';
@@ -18,9 +18,9 @@ exports.login = (req, res) => {
 exports.loginAuth = async (req, res) => {
     await client.connect();
     let salt = bcrypt.genSaltSync(10);
-    const filteredDocs = await collection.findOne({name: req.body.username}).toArray();
+    const filteredDocs = await collection.findOne({ name: req.body.username }).toArray();
     let hash = filteredDocs.password;
-    if ((req.body.username && req.body.password) == (filteredDocs.name && bcrypt.compareSync(req.body.password, hash))){
+    if ((req.body.username && req.body.password) == (filteredDocs.name && bcrypt.compareSync(req.body.password, hash))) {
         req.session.user = {
             isAuthenticated: true,
             username: req.body.username
@@ -65,7 +65,7 @@ exports.createUser = async (req, res) => {
     }
     const insertResult = await collection.insertOne(person);
     client.close();
-    res.redirect('/');
+    res.redirect('/login');
 };
 
 exports.userProfile = async (req, res) => {
