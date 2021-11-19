@@ -4,6 +4,7 @@ const path = require('path');
 const expressSession = require('express-session');
 const routes = require('./routes/routes.js');
 
+
 const app = express();
 
 app.set('view engine', 'pug');
@@ -29,6 +30,7 @@ const checkAuth = (req, res, next) => {
 }
 
 app.get('/login', routes.login);
+app.post('/login', urlencodedParser, routes.loginAuth)
 app.get('/create', routes.create);
 app.post('/createUser', urlencodedParser, routes.createUser);
 app.get('/logout', routes.logout);
