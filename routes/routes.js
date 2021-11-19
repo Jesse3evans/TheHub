@@ -46,12 +46,16 @@ exports.feed = async (req, res) => {
     const postsResults = await posts.find({}).limit(6).toArray();
     const usersResults = await posts.find({}).toArray();
     console.log(req.body.username)
-    const filteredDocs = await users.findOne({username: req.body.username});
+    let rawuser ={
+        username:req.params.username
+    }
+    console.log(rawuser.username);
+    const filteredDocs = await users.findOne({username: rawuser.username});
     client.close();
     res.render('feed', {
         postArray: postsResults,
         userArray: usersResults,
-        user: filteredDocs.username
+        user: filteredDocs
     });
 }
 
