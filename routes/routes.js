@@ -17,8 +17,10 @@ exports.login = (req, res) => {
 
 exports.loginAuth = async (req, res) => {
     await client.connect();
-    let salt = bcrypt.genSaltSync(10);
-    const filteredDocs = await collection.findOne({ name: req.body.username }).toArray();
+
+
+    const filteredDocs = await collection.findOne({name: req.body.username}).toArray();
+
     let hash = filteredDocs.password;
     if ((req.body.username && req.body.password) == (filteredDocs.name && bcrypt.compareSync(req.body.password, hash))) {
         req.session.user = {
@@ -110,5 +112,5 @@ exports.createPost = async (req, res) => {
     const insertResult = await posts.insertOne(person);
     client.close();
     // CHANGE THIS REDIRECT TO SOMEWHERE ELSE
-    res.redirect('/');
+    res.redirect('/feed');
 };
