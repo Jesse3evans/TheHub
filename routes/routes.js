@@ -43,9 +43,9 @@ exports.logout = (req, res) => {
 }
 exports.feed = async (req, res) => {
     await client.connect();
-    const postsResults = await posts.find({}).toArray().limit(6);
+    const postsResults = await posts.find({}).limit(6).toArray();
     const usersResults = await posts.find({}).toArray();
-    const filteredDocs = await users.findOne({name: req.params.username});
+    const filteredDocs = await users.findOne({username: "test"});
     client.close();
     res.render('feed', {
         postArray: postsResults,
