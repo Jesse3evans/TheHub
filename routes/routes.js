@@ -7,7 +7,9 @@ const client = new MongoClient(url);
 
 const dbName = 'Userbase';
 const db = client.db(dbName);
-const collection = db.collection('Users');
+const users = db.collection('Users');
+const posts = db.collection('Posts');
+
 
 exports.login = (req, res) => {
     res.render('login')
@@ -38,6 +40,14 @@ exports.logout = (req, res) => {
         }
     })
 }
+exports.feed = (req, res) => {
+
+}
+
+
+
+// USER ROUTES
+//
 
 exports.create = (req, res) => {
     res.render('create')
@@ -58,10 +68,47 @@ exports.createUser = async (req, res) => {
     res.redirect('/');
 };
 
-exports.userProfile = (req, res) => {
-    res.render('userProfile')
+exports.userProfile = async (req, res) => {
+    await client.connect();
+    const filteredDocs = await users.findOne({_id: ObjectId(req.params.id)});
+    client.close();
+    res.render('userProfile', {
+        user: filteredDocs
+    });
+};
+
+
+
+
+
+
+// POST ROUTES
+//
+
+
+exports.viewPost = async (req, res) => {
+    await client.connect();
+    const filteredDocs = await posts.findOne({_id: ObjectId(req.params.id)});
+    client.close();
+    res.render('post', {
+        post: filteredDocs
+    });
+};
+
+exports.newPost = (req, res) => {
+    res.render('newPost')
 }
 
-exports.feed = (req, res) => {
-
-}
+exports.createPost = async (req, res) => {
+    await client.connect();
+    let post = {
+        user: req.body.userid,
+        title: req.body.password,
+        body: req.body.body,
+        image: req.body.image
+    }
+    const insertResult = await posts.insertOne(person);
+    client.close();
+    // CHANGE THIS REDIRECT TO SOMEWHERE ELSE
+    res.redirect('/');
+};

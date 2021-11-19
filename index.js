@@ -29,12 +29,23 @@ const checkAuth = (req, res, next) => {
     }
 }
 
+//app.get('/', routes.index);
+// have this redirect to some shit (like the feed)
+
 app.get('/login', routes.login);
 app.post('/login', urlencodedParser, routes.loginAuth)
+app.get('/logout', routes.logout);
+app.get('/feed', checkAuth, routes.feed);
+
 app.get('/create', routes.create);
 app.post('/createUser', urlencodedParser, routes.createUser);
-app.get('/logout', routes.logout);
-app.get('/userProfile', checkAuth, routes.userProfile);
-app.get('/feed', checkAuth, routes.feed);
+app.get('/user/:id', checkAuth, routes.userProfile);
+//app.get('/user/', checkAuth, routes.userProfile);
+// this should be a page that defaults to current
+// logged in user's page (somehow pass a default value)
+
+app.get('/post/:id', checkAuth, routes.viewPost);
+app.get('/post', checkAuth, routes.newPost);
+
 
 app.listen(3000);
