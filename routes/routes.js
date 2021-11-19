@@ -64,7 +64,7 @@ exports.createUser = async (req, res) => {
     }
     const insertResult = await collection.insertOne(person);
     client.close();
-    res.redirect('/');
+    res.redirect('/login');
 };
 
 exports.userProfile = async (req, res) => {
@@ -109,5 +109,5 @@ exports.createPost = async (req, res) => {
     const insertResult = await posts.insertOne(person);
     client.close();
     // CHANGE THIS REDIRECT TO SOMEWHERE ELSE
-    res.redirect('/');
+    res.redirect('/feed');
 };
