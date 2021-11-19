@@ -60,9 +60,9 @@ exports.createUser = async (req, res) => {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(req.body.password, salt);
     let person = {
-        name: req.body.username,
+        username: req.body.username,
         password: hash,
-        display: req.body.displayName,
+        displayName: req.body.displayName,
         image: req.body.profilePic
     }
     const insertResult = await users.insertOne(person);
@@ -77,6 +77,7 @@ exports.userProfile = async (req, res) => {
     res.render('userProfile', {
         user: filteredDocs
     });
+    console.log(filteredDocs)
 };
 
 
