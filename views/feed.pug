@@ -37,63 +37,20 @@ h1(style='text-align: center; margin-top:4vw') Hub&apos;necessitatibus
       #uploadPost(onclick='uploadPost()') Post
   #friendsList
     h1 Friends List
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
-    #friend
-      img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-      a(href='')
-        h1 Friend Name
+    each user in userArray
+      #friend
+        img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
+        a(href='')
+          h1 #{user.displayName}
 #content
   #margin-box
     h1(style=' text-align: center;') My Feed
-    #post-header
-      h1 Post - Title
-      p Date:
-    #post
-      p
-        | Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi labore eveniet, fuga sed eum voluptatum autem architecto quod nobis porro numquam minima hic sit qui. Illo tempore reprehenderit ad saepe?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem sapiente incidunt unde illum sequi eaque, amet perferendis facere vitae fugiat eos? Nostrum atque rerum aliquid repellendus quibusdam necessitatibus inventore optio.
-    #post-header
-      h1 Post - Title
-      p Date:
-    #post
-      p
-        | Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi labore eveniet, fuga sed eum voluptatum autem architecto quod nobis porro numquam minima hic sit qui. Illo tempore reprehenderit ad saepe?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem sapiente incidunt unde illum sequi eaque, amet perferendis facere vitae fugiat eos? Nostrum atque rerum aliquid repellendus quibusdam necessitatibus inventore optio.
-    #post-header
-      h1 Post - Title
-      p Date:
-    #post
-      p
-        | Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi labore eveniet, fuga sed eum voluptatum autem architecto quod nobis porro numquam minima hic sit qui. Illo tempore reprehenderit ad saepe?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem sapiente incidunt unde illum sequi eaque, amet perferendis facere vitae fugiat eos? Nostrum atque rerum aliquid repellendus quibusdam necessitatibus inventore optio.
+    each post in postArray 
+      #post-header
+        h1 #{post.title}
+        p #{post.date}
+      #post
+        p #{post.body}
   br
   footer
     h1 The Hub - Powered by the plug

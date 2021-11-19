@@ -43,12 +43,13 @@ exports.logout = (req, res) => {
 }
 exports.feed = async (req, res) => {
     await client.connect();
-    const findResult = await posts.find({}).toArray().limit(6);
+    const postsResults = await posts.find({}).toArray().limit(6);
+    const usersResults = await posts.find({}).toArray();
     const filteredDocs = await users.findOne({name: req.params.username});
-    console.log('Found documents => ', findResult);
     client.close();
     res.render('feed', {
-        postArray: findResult,
+        postArray: postsResults,
+        userArray: usersResults,
         user: filteredDocs.username
     });
 }
@@ -111,12 +112,12 @@ exports.newPost = (req, res) => {
 exports.createPost = async (req, res) => {
     await client.connect();
     let post = {
-        user: req.body.userid,
-        title: req.body.password,
+        user: req.body.username,
+        title: req.body.title,
         body: req.body.body,
-        image: req.body.image
+        date: req.body.date
     }
-    const insertResult = await posts.insertOne(person);
+    const insertResult = await posts.insertOne(post);
     client.close();
     // CHANGE THIS REDIRECT TO SOMEWHERE ELSE
     res.redirect('/feed');
