@@ -29,9 +29,7 @@ const checkAuth = (req, res, next) => {
     }
 }
 
-//app.get('/', routes.index);
-// have this redirect to some shit (like the feed)
-
+app.get('/', checkAuth, routes.feed);
 app.get('/login', routes.login);
 app.post('/login', urlencodedParser, routes.loginAuth)
 app.get('/logout', routes.logout);
