@@ -41,7 +41,7 @@ exports.logout = (req, res) => {
         }
     })
 }
-exports.feed = (req, res) => {
+exports.feed = async (req, res) => {
     await client.connect();
     const findResult = await posts.find({}).toArray().limit(6);
     console.log('Found documents => ', findResult);
