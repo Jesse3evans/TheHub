@@ -65,7 +65,7 @@ exports.createUser = async (req, res) => {
         display: req.body.displayName,
         image: req.body.profilePic
     }
-    const insertResult = await collection.insertOne(person);
+    const insertResult = await users.insertOne(person);
     client.close();
     res.redirect('/login');
 };
