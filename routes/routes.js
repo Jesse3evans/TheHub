@@ -44,12 +44,12 @@ exports.logout = (req, res) => {
 exports.feed = async (req, res) => {
     await client.connect();
     const findResult = await posts.find({}).toArray().limit(6);
-    const filteredDocs = await collection.findOne({name: req.params.username});
+    const filteredDocs = await users.findOne({name: req.params.username});
     console.log('Found documents => ', findResult);
     client.close();
     res.render('feed', {
-        postArray: findResult
-        user: filteredDocs
+        postArray: findResult,
+        user: filteredDocs.username
     });
 }
 
