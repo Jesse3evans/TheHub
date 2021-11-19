@@ -26,7 +26,7 @@ exports.loginAuth = async (req, res) => {
             isAuthenticated: true,
             username: req.body.username
         }
-        res.redirect('/feed')
+        res.redirect('/feed/'+req.body.username)
     } else {
         res.redirect('/login');
     }
@@ -44,10 +44,12 @@ exports.logout = (req, res) => {
 exports.feed = async (req, res) => {
     await client.connect();
     const findResult = await posts.find({}).toArray().limit(6);
+    const filteredDocs = await collection.findOne({name: req.params.username});
     console.log('Found documents => ', findResult);
     client.close();
     res.render('feed', {
         postArray: findResult
+        user: filteredDocs
     });
 }
 
