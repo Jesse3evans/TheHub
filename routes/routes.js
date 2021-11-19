@@ -45,7 +45,8 @@ exports.feed = async (req, res) => {
     await client.connect();
     const postsResults = await posts.find({}).limit(6).toArray();
     const usersResults = await posts.find({}).toArray();
-    const filteredDocs = await users.findOne({username: "test"});
+    console.log(req.body.username)
+    const filteredDocs = await users.findOne({username: req.body.username});
     client.close();
     res.render('feed', {
         postArray: postsResults,
