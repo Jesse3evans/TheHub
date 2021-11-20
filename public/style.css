@@ -2,7 +2,7 @@
     padding: 0;
     margin: 0;
     overflow-x: hidden;
-    
+    user-select: none;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 100;
 }
@@ -215,6 +215,7 @@ h1{
     width:40vw;
     position:relative;
     left:11.5vw;
+    overflow-y: hidden;
     top:10vw;
     
 }
@@ -232,9 +233,7 @@ h1{
     left:27vw;
     top:5vw;
 }
-p{
-    color:#fff;
-}
+
 footer{
     position:relative;
     bottom:0vw;
@@ -320,7 +319,8 @@ form{
     font-weight:100;
     color: burlywood;
     background-color:#555;
-    width:95%
+    width:95%;
+    height: auto;
 }
 input{
     background-color:#ccc;
@@ -377,16 +377,16 @@ input{
 #submit{
     position:relative;
     color:#fff;
-    font-size: 2vw;
+    font-size: 1.5vw;
     background-color: #000;
     border: 1px solid #fff;
     text-align:center;
-    padding:.5vw;
-    width: 10vw;
-    height:3.2vw;
+    padding-bottom:.5vw;
+    width: 11vw;
+    height:10vw;
+    overflow-y: hidden;
     z-index:1;
-    left:26.5vw;
-    top:.4vw;
+    
     border-radius: 1%;
     box-shadow: 1px 1px 12px 4px #fff;
     cursor: pointer;
