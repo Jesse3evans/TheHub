@@ -18,17 +18,20 @@ exports.login = (req, res) => {
 exports.loginAuth = async (req, res) => {
     await client.connect();
 
-    const filteredDocs = await users.findOne({username: req.body.username}).toArray();
+    const filteredDocs = await users.findOne({username: req.body.username});
 
     let hash = filteredDocs.password;
+    
     if ((req.body.username && req.body.password) == (filteredDocs.username && bcrypt.compareSync(req.body.password, hash))) {
         req.session.user = {
             isAuthenticated: true,
             username: req.body.username
         }
+        console.log(req.body.username)
         res.redirect('/feed/'+req.body.username)
     } else {
-        res.redirect('/login');
+        console.log(req.body.username)
+        res.redirect('/feed/'+req.body.username)
     }
 }
 
@@ -43,9 +46,8 @@ exports.logout = (req, res) => {
 }
 exports.feed = async (req, res) => {
     await client.connect();
-    const postsResults = await posts.find({}).limit(6).toArray();
-    const usersResults = await posts.find({}).toArray();
-    console.log(req.body.username)
+    const postsResults = await posts.find({}).toArray();
+    const usersResults = await users.find({}).toArray();
     let rawuser ={
         username:req.params.username
     }
@@ -76,7 +78,7 @@ exports.createUser = async (req, res) => {
         username: req.body.username,
         password: hash,
         displayName: req.body.displayName,
-        image: req.body.profilePic
+        message: req.body.message
     }
     const insertResult = await users.insertOne(person);
     client.close();
@@ -85,10 +87,16 @@ exports.createUser = async (req, res) => {
 
 exports.userProfile = async (req, res) => {
     await client.connect();
-    const filteredDocs = await users.findOne({_id: ObjectId(req.params.id)});
+    const filteredDocs = await users.findOne({username: req.params.id});
+    let rawuser =  filteredDocs ; 
+    //search through array of user.friends then see what to do 
+    const postsResults = await posts.find({user: req.params.id}).toArray();
+    console.log(postsResults);
+    console.log(rawuser);
     client.close();
     res.render('userProfile', {
-        user: filteredDocs
+        user: filteredDocs,
+        postArray:  postsResults 
     });
 };
 
@@ -103,10 +111,15 @@ exports.userProfile = async (req, res) => {
 
 exports.viewPost = async (req, res) => {
     await client.connect();
-    const filteredDocs = await posts.findOne({_id: ObjectId(req.params.id)});
+    var id = Math.floor(req.params.id);
+    console.log(id)
+    const filteredDocs = await posts.findOne({postId: id});
+    const mainUser = await users.findOne({username: req.params.username});
+    console.log(filteredDocs)
     client.close();
     res.render('post', {
-        post: filteredDocs
+        post: filteredDocs,
+        user:mainUser
     });
 };
 
@@ -116,14 +129,32 @@ exports.newPost = (req, res) => {
 
 exports.createPost = async (req, res) => {
     await client.connect();
+    let ts = Date.now();
+
+    let date_ob = new Date(ts);
+    let date = date_ob.getDate();
+    let month = date_ob.getMonth() + 1;
+    let year = date_ob.getFullYear();
+   // current hours
+    let hours = date_ob.getHours()-12;
+
+    // current minutes
+    let minutes = date_ob.getMinutes();
+    if(minutes<10){
+        minutes = "0"+minutes
+    }
+    // prints date & time in YYYY-MM-DD format
+    var rawDate = ( month +"-" + date+ "-"+ year);
     let post = {
         user: req.body.username,
         title: req.body.title,
-        body: req.body.body,
-        date: req.body.date
+        message: req.body.message,
+        date:rawDate,
+        time: (hours+":"+minutes),
+        postId: await (await posts.countDocuments()).valueOf()
     }
     const insertResult = await posts.insertOne(post);
     client.close();
     // CHANGE THIS REDIRECT TO SOMEWHERE ELSE
-    res.redirect('/feed');
+    res.redirect('/feed/'+post.user);
 };
