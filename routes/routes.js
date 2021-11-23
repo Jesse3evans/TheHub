@@ -24,19 +24,23 @@ const hashComplete = (password, the_hash) => {
 exports.loginAuth = async (req, res) => {
     await client.connect();
 
-    const filteredDocs = await users.find({username: req.body.username}).toArray();
-
-    if (bcrypt.compareSync(req.body.password, filteredDocs[0].password)){
-        req.session.user = {
-            isAuthenticated: true,
-            username: filteredDocs[0].username
-        }
-        console.log("Username: " + req.body.username)
-        res.redirect('/feed/'+req.body.username)
+    if(req.body.username == undefined || req.body.password == undefined){
+        res.redirect('/login');
     } else {
-        console.log("Username: " + req.body.username)
-        res.redirect('/feed/'+req.body.username)
+        const filteredDocs = await users.find({username: req.body.username}).toArray();
+
+        if (bcrypt.compareSync(req.body.password, filteredDocs[0].password)){
+            req.session.user = {
+                isAuthenticated: true,
+                username: filteredDocs[0].username
+            }
+            console.log("Username: " + req.body.username)
+            res.redirect('/feed/'+req.body.username)
+        } else {
+            res.redirect('/login')
+        }
     }
+    client.close();
 }
 
 exports.logout = (req, res) => {
