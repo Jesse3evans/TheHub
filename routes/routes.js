@@ -164,3 +164,18 @@ exports.createPost = async (req, res) => {
     // CHANGE THIS REDIRECT TO SOMEWHERE ELSE
     res.redirect('/feed/'+post.user);
 };
+
+
+exports.deletePost = async (req, res) => {
+    await client.connect();
+    const deleteResult = await posts.deleteOne(req.params.id, req.params.username)
+    client.close();
+    res.redirect('/feed');
+};
+
+exports.deleteUser = async (req, res) => {
+    await client.connect();
+    const deleteResult = await users.deleteOne(req.body.username)
+    client.close();
+    res.redirect('/login');
+};
