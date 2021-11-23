@@ -33,15 +33,15 @@ app.get('/', checkAuth, routes.feed);
 app.get('/login', routes.login);
 app.post('/login', urlencodedParser, routes.loginAuth)
 app.get('/logout', routes.logout);
-app.get('/feed/:username',urlencodedParser, routes.feed);
+app.get('/feed/:username', checkAuth, urlencodedParser, routes.feed);
 app.get('/createUser', routes.create);
 app.post('/createUser', urlencodedParser, routes.createUser);
-app.get('/user/:id', routes.userProfile);
+app.get('/user/:id', checkAuth, routes.userProfile);
 //app.get('/user/', checkAuth, routes.userProfile);
 // this should be a page that defaults to current
 // logged in user's page (somehow pass a default value)
-app.post('/post', urlencodedParser, routes.createPost);
-app.get('/post/:id/:username', routes.viewPost);
+app.post('/post', checkAuth, urlencodedParser, routes.createPost);
+app.get('/post/:id/:username', checkAuth, routes.viewPost);
 app.get('/post', checkAuth, routes.newPost);
 
 
