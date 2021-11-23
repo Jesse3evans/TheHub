@@ -44,7 +44,7 @@ exports.logout = (req, res) => {
 }
 exports.feed = async (req, res) => {
     await client.connect();
-    const postsResults = await posts.find({}).toArray();
+    const postsResults = await (await posts.find({}).toArray()).reverse();
     const usersResults = await users.find({}).toArray();
     let rawuser ={
         username:req.params.username

@@ -329,13 +329,16 @@ input{
     height:2.5vw!important;
     width:16vw;
 }
+input[type=text]{
+    user-select: text;
+}
 
 #message{
     max-height:20vw;
     max-width:35vw;
     min-height:20vw;
     min-width:35vw;
-    
+    user-select: text;
 }
 
 #friendsList{
