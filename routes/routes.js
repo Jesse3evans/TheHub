@@ -18,14 +18,12 @@ exports.login = (req, res) => {
 exports.loginAuth = async (req, res) => {
     await client.connect();
 
-    const filteredDocs = await users.findOne({username: req.body.username});
+    const filteredDocs = await users.findOne({username: req.body.username}).toArray();
 
-    let hash = filteredDocs.password;
-    
-    if ((req.body.username && req.body.password) == (filteredDocs.username && bcrypt.compareSync(req.body.password, hash))) {
+    if (bcrypt.compare(req.body.password, filteredDocs.password)){
         req.session.user = {
             isAuthenticated: true,
-            username: req.body.username
+            username: filteredDocs.username
         }
         console.log(req.body.username)
         res.redirect('/feed/'+req.body.username)
@@ -68,6 +66,11 @@ exports.feed = async (req, res) => {
 
 exports.create = (req, res) => {
     res.render('create')
+}
+
+const hashComplete = (password, the_hash) => {
+    bcrypt.compare(password, the_hash, (err, res) =>{
+    })
 }
 
 exports.createUser = async (req, res) => {
