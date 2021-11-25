@@ -39,6 +39,7 @@ body{background-color: #000;}
     background-color: rgb(207, 207, 207);
     z-index: 4;
     transition: .7s;
+    
 }
 #margin-box{
     background-color: #555;;
@@ -54,6 +55,7 @@ nav {
     text-align: center;
     position: relative;
     top: 20%;
+    overflow-y: hidden;
 }
 
 li {
@@ -231,9 +233,8 @@ h1{
     position: relative;
     line-height: 2vw;
     left:27vw;
-    top:5vw;
+    margin:5vw
 }
-
 footer{
     position:relative;
     bottom:0vw;
@@ -362,12 +363,31 @@ input[type=text]{
     background-color: #555;
 
 }
+#userExplore{
+    border:1px solid burlywood;
+    border-radius: 2vw;
+    top:0;
+    width:40%;
+    float: left;
+    margin:1vw;
+    margin-top:5vw;
+    background-color: #000;
 
+}
+#box{
+    position: relative;
+    
+    padding:1vw;
+    height:auto;
+    width:80%;
+    left:15%;
+}
 #friend:first-child{
     
     margin-top: 1vw;
 
 }
+
 
 #friendPic{
     height:3vw;
