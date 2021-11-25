@@ -3,23 +3,28 @@ head
   meta(charset='utf-8')
   title Profile - Layout
   link(rel='stylesheet' type='text/css' href='/style.css')
+  link(rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
   script
       include nav2.js
 #menu
   nav
-    //- //img#profilePic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
+    img#profilePic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
     li#link1
       span#dash1 -
-      a(href='/user/' + user.username) Profile
+      a(href='/user/' + user.username) 
+        i(class="fa fa-user" aria-hidden="true")
     li#link1
       span#dash1 -
-      a(href='/feed/' + user.username) Make Post
+      a(href='/feed/'+ user.username)
+        i(class="fa fa-pencil-square-o" aria-hidden="true")
     li#link1
       span#dash1 -
-      a(href='/setting/#{user.username}') Settings
+      a(href='')
+        i(class="fa fa-cog" aria-hidden="true")
     li#link1
       span#dash1 -
-      a(href='/logout/') Logout
+      a(href='/logout/') 
+        i(class="fa fa-sign-out" aria-hidden="true")
 #opener(onmouseover='openMenu()')
 #full-overlay(onmouseover='closeMenu()')
 #fixed-header
