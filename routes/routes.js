@@ -106,7 +106,21 @@ exports.userProfile = async (req, res) => {
     client.close();
     res.render('userProfile', {
         user: filteredDocs,
-        postArray:  postsResults 
+        postArray: postsResults 
+    });
+};
+exports.otherProfile = async (req, res) => {
+    await client.connect();
+    const filteredDocs = await users.findOne({username: req.params.mainUser});
+    const other = await users.findOne({username: req.params.otherUser});
+    //search through array of user.friends then see what to do 
+    const postsResults = await posts.find({user: req.params.otherUser}).toArray();
+    console.log(postsResults);
+    client.close();
+    res.render('friendProfile', {
+        mainUser: filteredDocs,
+        otherUser: other,
+        postArray: postsResults 
     });
 };
 
@@ -146,12 +160,15 @@ exports.createPost = async (req, res) => {
     let month = date_ob.getMonth() + 1;
     let year = date_ob.getFullYear();
    // current hours
-    let hours = date_ob.getHours()-12;
+    let hours = date_ob.getHours();
 
     // current minutes
     let minutes = date_ob.getMinutes();
     if(minutes<10){
         minutes = "0"+minutes
+    }
+    if(hours>=13){
+        hours=hours-12
     }
     // prints date & time in YYYY-MM-DD format
     var rawDate = ( month +"-" + date+ "-"+ year);
@@ -180,6 +197,17 @@ exports.deletePost = async (req, res) => {
 exports.deleteUser = async (req, res) => {
     await client.connect();
     const deleteResult = await users.deleteOne(req.body.username)
+    const deletePosts = await posts.deleteMany(req.body.username)
     client.close();
     res.redirect('/login');
 };
+//explore
+exports.exploreUsers = async(req,res) =>{
+    await client.connect();
+    const usersResults =  await users.find({}).toArray();
+    const filteredDocs = await users.findOne({username: req.params.mainUser});
+    res.render('explore', {
+        userArray: usersResults,
+        user: filteredDocs
+    });
+}
