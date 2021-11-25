@@ -204,7 +204,8 @@ exports.deleteUser = async (req, res) => {
 //explore
 exports.exploreUsers = async(req,res) =>{
     await client.connect();
-    const usersResults =  await users.find({}).toArray();
+    var usersResults =  await users.find({}).toArray()
+    usersResults = usersResults.sort(() => Math.random() - 0.5)
     const filteredDocs = await users.findOne({username: req.params.mainUser});
     res.render('explore', {
         userArray: usersResults,
