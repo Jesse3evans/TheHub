@@ -1,0 +1,20 @@
+extends layout 
+block content
+    #content(style='top:10vw;height:75vw')
+        #margin-box(style='height:60vw')
+            h1(style="text-align:center; margin-top:2.5vw") Edit User Information
+            #addForm(style='position:relative;top:2vw;left:18vw; overflow-y: hidden;')
+                form(action="/editUser" method="post")
+                    h1 Username
+                    input(type='text' name="username")
+                    h1 Password
+                    input(type='text' name="password" )
+                    h1 Display Name
+                    input(type='text' name ="displayName")
+                    h1 Status Message:            
+                    input(type='text' name="message")
+                    <br>
+                    <br>
+                    input(id="submit" type="submit" value="Submit")
+        footer
+            h1 The Hub - Powered by the plug
