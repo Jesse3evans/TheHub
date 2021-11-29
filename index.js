@@ -43,7 +43,7 @@ app.get('/user/:id', checkAuth, routes.userProfile);
 app.post('/post', checkAuth, urlencodedParser, routes.createPost);
 app.get('/post/:id/:username', checkAuth, routes.viewPost);
 app.get('/post', checkAuth, routes.newPost);
-app.get('/explore/:mainUser', routes.exploreUsers);
+app.get('/explore/:mainUser', checkAuth,  routes.exploreUsers);
 app.post('/deletePost/:id/:username', checkAuth, routes.deletePost)
 app.post('/deleteUser/:username', routes.deleteUser)
 
