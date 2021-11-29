@@ -50,7 +50,7 @@ body{background-color: #000;}
 
 }
 nav {
-    height: 60%;
+    height: auto;
     width: 100%;
     text-align: center;
     position: relative;
@@ -82,13 +82,13 @@ nav a {
 }
 
 #link1:hover>#dash1 {
-    color: burlywood;
-    left: 0;
+    color: #fff;
+    left: -0.5vw;
     opacity: 1;
 }
 
 nav a:hover {
-    color: burlywood;
+    color: #fff;
     transition: .5s
 }
 
@@ -275,7 +275,7 @@ footer{
 }
 footer{
     background-color:#000;
-    height:4vw;
+    height:auto;
     width:100%;
     text-align: center;
     color:burlywood;
@@ -289,6 +289,11 @@ footer{
     position: relative;
     left:35vw;
     top:10vw;
+}
+i{
+    position: relative;
+    top:0.3vw;
+   
 }
 #post-links a{
     
