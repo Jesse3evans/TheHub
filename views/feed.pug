@@ -1,74 +1,38 @@
-doctype html
-head
-  meta(charset='utf-8')
-  title The Hub
-  link(rel='stylesheet' type='text/css' href='/style.css')
-  link(rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
-  script
-      include nav2.js
-#menu
-  nav
-    img#profilePic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-    li#link1
-      span#dash1 -
-      a(href='/explore/' + user.username)
-        i(class="fa fa-search" aria-hidden="true")
-    li#link1
-      span#dash1 -
-      a(href='/user/' + user.username) 
-        i(class="fa fa-user" aria-hidden="true")
-    li#link1
-      span#dash1 -
-      a(href='/feed/'+ user.username)
-        i(class="fa fa-pencil-square-o" aria-hidden="true")
-    li#link1
-      span#dash1 -
-      a(href='settings')
-        i(class="fa fa-cog" aria-hidden="true")
-    li#link1
-      span#dash1 -
-      a(href='/logout/') 
-        i(class="fa fa-sign-out" aria-hidden="true")
-#opener(onmouseover='openMenu()')
-#full-overlay(onmouseover='closeMenu()')
-// fixed logo header
-#fixed-header
-  img#logo(src='https://th.bing.com/th/id/R.b8a297af7bc9f50434b64ac1241012f4?rik=1zp6m%2brTeRMSaw&riu=http%3a%2f%2fstatic1.squarespace.com%2fstatic%2f59834fee6f4ca39f8397a21e%2ft%2f59b95550b1ffb69891e9ab5d%2f1505318229028%2fThe%2bHub-01.png%3fformat%3d1500w&ehk=X3H6fLY4E6%2bQeMtExFWNKo5PBSer99ci4FRt8r%2f4Dg4%3d&risl=&pid=ImgRaw&r=0')
-  p#welcome-text Welcome, #{user.username}
-  img#profilePic0(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-// post box
-h1(style='text-align: center; margin-top:4vw') Hub Forum
-#margin-box(style='height:60vw;position:absolute;top:10vw; overflow-y: hidden;')
-  h1(style=' margin:10vw 0 0 62vw;transform: rotate(180);') My Feed
-  #addForm
-    form(action='/post' method="post")
-      input(style="display:none" type="text" name="username" value= user.username)
-      h1 Title
-      input(type='text' name="title")
-      h1 Message
-      textarea#message(type='text' name="message")
-      <br>
-      <br>
-      input(id="submit" type="submit" value="Post") 
-  #friendsList
-    h1 Users List
-    each users in userArray
-      #friend
-        img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-        a(href='/user/'+user.username+'/'+ users.username)
-          h1 #{users.displayName}
-#content(style="height:65vw;")
-  #margin-box(style="height:50vw;")
-    h1(style=' text-align: center;') My Feed
-    each post in postArray 
-      #post-header
-        a(href='/post/'+post.postId+'/'+user.username)
-          h1(style="background-color:#555") #{post.title}
-        p #{post.date}
-        p #{post.time}
-        p User: #{post.user}
-      #post
-        p #{post.message}
-  br
-  footer
-    h1 The Hub - Powered by the plug
+extends layout 
+block content
+  // post box
+  h1(style='text-align: center; margin-top:4vw') Hub Forum
+  #margin-box(style='height:60vw;position:absolute;top:10vw; overflow-y: hidden;')
+    h1(style=' margin:10vw 0 0 62vw;transform: rotate(180);') My Feed
+    #addForm
+      form(action='/post' method="post")
+        input(style="display:none" type="text" name="username" value= user.username)
+        h1 Title
+        input(type='text' name="title")
+        h1 Message
+        textarea#message(type='text' name="message")
+        <br>
+        <br>
+        input(id="submit" type="submit" value="Post") 
+    #friendsList
+      h1 Users List
+      each users in userArray
+        #friend
+          img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
+          a(href='/user/'+user.username+'/'+ users.username)
+            h1 #{users.displayName}
+  #content(style="height:65vw;")
+    #margin-box(style="height:50vw;")
+      h1(style=' text-align: center;') My Feed
+      each post in postArray 
+        #post-header
+          a(href='/post/'+post.postId+'/'+user.username)
+            h1(style="background-color:#555") #{post.title}
+          p #{post.date}
+          p #{post.time}
+          p User: #{post.user}
+        #post
+          p #{post.message}
+    footer
+        h1 The Hub - Powered by the plug
+    
