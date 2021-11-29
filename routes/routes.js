@@ -118,7 +118,7 @@ exports.otherProfile = async (req, res) => {
     console.log(postsResults);
     client.close();
     res.render('friendProfile', {
-        mainUser: filteredDocs,
+        user: filteredDocs,
         otherUser: other,
         postArray: postsResults 
     });
