@@ -45,6 +45,6 @@ app.get('/post/:id/:username', checkAuth, routes.viewPost);
 app.get('/post', checkAuth, routes.newPost);
 app.get('/explore/:mainUser', checkAuth,  routes.exploreUsers);
 app.post('/deletePost/:id/:username', checkAuth, routes.deletePost)
-app.post('/deleteUser/:username', routes.deleteUser)
+app.post('/deleteUser/:username',checkAuth,  routes.deleteUser)
 
 app.listen(3000);
