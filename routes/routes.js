@@ -100,7 +100,7 @@ exports.userProfile = async (req, res) => {
     const filteredDocs = await users.findOne({username: req.params.id});
     let rawuser =  filteredDocs ; 
     //search through array of user.friends then see what to do 
-    const postsResults = await posts.find({user: req.params.id}).toArray().reverse();
+    const postsResults = await posts.find({user: req.params.id}).toArray();
     console.log(postsResults);
     console.log(rawuser);
     client.close();
