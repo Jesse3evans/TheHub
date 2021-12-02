@@ -186,16 +186,34 @@ exports.createPost = async (req, res) => {
     res.redirect('/feed/'+post.user);
 };
 
-exports.editPost = (req, res) => {
+exports.editPostView = (req, res) => {
     
     res.render('editPost',{
 
     })
 }
+
+exports.editPost = async (req, res) => {
+    await client.connect();
+    var x = Math.floor(req.params.postId);
+    const updateResult = await collection.updateOne(
+        //post id instead
+        {postId:x},
+        //title and message 
+        { $set: {
+            title: req.body.title,
+            message: req.body.message
+        }}
+    )
+    client.close();
+    res.redirect('/feed/'+req.params.user);
+}
+
+
 exports.deletePost = async (req, res) => {
     await client.connect();
     var x = Math.floor(req.params.postId);
-    const deleteResult = await posts.deleteOne({postId:x})
+    const deleteResult = await posts.deleteOne({postId:x});
     client.close();
     res.redirect('/feed/'+req.params.user);
 };
