@@ -39,12 +39,15 @@ app.get('/feed/:username', checkAuth, urlencodedParser, routes.feed);
 app.get('/createUser', routes.create);
 app.post('/createUser', urlencodedParser, routes.createUser);
 app.get('/user/:id', checkAuth, routes.userProfile);
-
+app.get('/user/:mainUser/:otherUser', checkAuth, routes.otherProfile);
 app.post('/post', checkAuth, urlencodedParser, routes.createPost);
 app.get('/post/:id/:username', checkAuth, routes.viewPost);
 app.get('/post', checkAuth, routes.newPost);
-app.get('/explore/:mainUser', checkAuth,  routes.exploreUsers);
+app.get('/deletePost/:postId/:user', checkAuth,routes.deletePost);
+app.get('/editPost/:postId/:user', checkAuth ,routes.editPost);
+app.get('/explore/:mainUser',checkAuth, routes.exploreUsers);
+
 app.post('/deletePost/:id/:username', checkAuth, routes.deletePost)
-app.post('/deleteUser/:username',checkAuth,  routes.deleteUser)
+app.post('/deleteUser/:username', routes.deleteUser)
 
 app.listen(3000);
