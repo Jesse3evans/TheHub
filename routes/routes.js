@@ -100,7 +100,7 @@ exports.userProfile = async (req, res) => {
     const filteredDocs = await users.findOne({username: req.params.id});
     let rawuser =  filteredDocs ; 
     //search through array of user.friends then see what to do 
-    const postsResults = await posts.find({user: req.params.id}).toArray();
+    const postsResults = await (await posts.find({user: req.params.id}).toArray()).reverse();
     console.log(postsResults);
     console.log(rawuser);
     client.close();
@@ -186,12 +186,18 @@ exports.createPost = async (req, res) => {
     res.redirect('/feed/'+post.user);
 };
 
+exports.editPost = (req, res) => {
+    
+    res.render('editPost',{
 
+    })
+}
 exports.deletePost = async (req, res) => {
     await client.connect();
-    const deleteResult = await posts.deleteOne(req.params.id, req.params.username)
+    var x = Math.floor(req.params.postId);
+    const deleteResult = await posts.deleteOne({postId:x})
     client.close();
-    res.redirect('/feed');
+    res.redirect('/feed/'+req.params.user);
 };
 
 exports.deleteUser = async (req, res) => {
@@ -206,9 +212,12 @@ exports.exploreUsers = async(req,res) =>{
     await client.connect();
     var usersResults =  await users.find({}).toArray()
     usersResults = usersResults.sort(() => Math.random() - 0.5)
-    const filteredDocs = await users.findOne({username: req.params.mainUser});
+    const filteredDocs = await users.findOne({username: req.params.mainUser})
     res.render('explore', {
         userArray: usersResults,
         user: filteredDocs
     });
 }
+
+//look through array inside user object
+//within each friend 
