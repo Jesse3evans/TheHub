@@ -39,7 +39,7 @@ app.get('/feed/:username', checkAuth, urlencodedParser, routes.feed);
 app.get('/createUser', routes.create);
 app.post('/createUser', urlencodedParser, routes.createUser);
 app.get('/user/:id', checkAuth, routes.userProfile);
-
+app.get('/user/:mainUser/:otherUser', checkAuth, routes.otherProfile);
 app.post('/post', checkAuth, urlencodedParser, routes.createPost);
 app.get('/post/:id/:username', checkAuth, routes.viewPost);
 app.get('/post', checkAuth, routes.newPost);
