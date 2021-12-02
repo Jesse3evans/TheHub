@@ -1,16 +1,16 @@
 extends layout 
 block content
     #content(style='top:10vw;height:60vw')
-    #margin-box(style='height:45vw')    
-        h1(style=' text-align: center;') #{post.user}'s Post
-        #post-header
-            h1(style="background-color:#555") #{post.title}
-            p #{post.date}
-            p #{post.time}
-            p User: #{post.user}
-        #post
-            p #{post.message}
-    br
-    br 
-    footer
-    h1 The Hub - Powered by the plug
+        #margin-box(style='height:45vw')    
+            h1(style=' text-align: center;') #{post.user}'s Post
+            #post-header
+                h1(style="background-color:#555") #{post.title}
+                p #{post.date}
+                p #{post.time}
+                p User: #{post.user}
+            #post
+                p #{post.message}
+        br
+        br 
+        footer
+            h1 The Hub - Powered by the plug

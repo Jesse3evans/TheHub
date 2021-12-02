@@ -7,7 +7,7 @@ block content
       //- //p(style='position:relative;left:22vw;top:-2vw; font-size:1vw;') 
       
       #statusMsg
-        p my status message
+        p #{otherUser.message}
   #content(style='top:60vw;height:65vw')
       #margin-box(style='height:50vw;')
         h1(style="text-align:center;margin-top:2.5vw") #{otherUser.displayName.charAt(0).toUpperCase()+otherUser.displayName.slice(1)}'s Post

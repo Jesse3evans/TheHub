@@ -3,7 +3,7 @@ block content
   // post box
   h1(style='text-align: center; margin-top:4vw') Hub Forum
   #margin-box(style='height:60vw;position:absolute;top:10vw; overflow-y: hidden;')
-    h1(style=' margin:10vw 0 0 62vw;transform: rotate(180);') My Feed
+    h1(style=' margin:10vw 0 0 62vw;') My Feed
     #addForm
       form(action='/post' method="post")
         input(style="display:none" type="text" name="username" value= user.username)
@@ -24,15 +24,30 @@ block content
   #content(style="height:65vw;")
     #margin-box(style="height:50vw;")
       h1(style=' text-align: center;') My Feed
+      
       each post in postArray 
-        #post-header
-          a(href='/post/'+post.postId+'/'+user.username)
-            h1(style="background-color:#555") #{post.title}
-          p #{post.date}
-          p #{post.time}
-          p User: #{post.user}
-        #post
-          p #{post.message}
+        if(post.user==user.username)
+          #post-header
+            a(href='/post/'+post.postId+'/'+user.username)
+              h1(style="background-color:#555") #{post.title}
+            p #{post.date}
+            p #{post.time}
+            p User: #{post.user}
+          #post
+            p #{post.message}
+            form(action='/editPost/'+post.postId+'/'+post.user method="get") 
+              input(type="submit" value="Edit")
+            form(action='/deletePost/'+post.postId+'/'+post.user  method="get") 
+              input(type="submit" value="Delete")
+        else
+          #post-header
+            a(href='/post/'+post.postId+'/'+user.username)
+              h1(style="background-color:#555") #{post.title}
+            p #{post.date}
+            p #{post.time}
+            p User: #{post.user}
+          #post
+            p #{post.message}
     footer
         h1 The Hub - Powered by the plug
     
