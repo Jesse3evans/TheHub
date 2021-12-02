@@ -124,6 +124,26 @@ exports.otherProfile = async (req, res) => {
     });
 };
 
+exports.updateUser = async (req, res) => {
+    await client.connect();
+    // re-salting/hashing new password
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(req.body.password, salt);
+
+    const updateResult = await users.updateOne(
+        //user id
+        {username:req.params.username},
+        //user info 
+        { $set: {
+            password: hash,
+            displayName: req.body.displayName,
+            message: req.body.message
+        }}
+    )
+    client.close();
+    res.redirect('/feed/'+req.params.user);
+};
+
 
 
 
@@ -196,7 +216,7 @@ exports.editPostView = (req, res) => {
 exports.editPost = async (req, res) => {
     await client.connect();
     var x = Math.floor(req.params.postId);
-    const updateResult = await collection.updateOne(
+    const updateResult = await posts.updateOne(
         //post id instead
         {postId:x},
         //title and message 
