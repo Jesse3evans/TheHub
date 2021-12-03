@@ -27,8 +27,7 @@ exports.loginAuth = async (req, res) => {
     if(req.body.username == undefined || req.body.password == undefined){
         res.redirect('/login');
     } else {
-        const filteredDocs = await users.find({username: req.body.username}).toArray();
-
+        const filteredDocs = await users.find({username: req.body.username}).toArray()
         if (bcrypt.compareSync(req.body.password, filteredDocs[0].password)){
             req.session.user = {
                 isAuthenticated: true,
@@ -124,26 +123,6 @@ exports.otherProfile = async (req, res) => {
     });
 };
 
-exports.updateUser = async (req, res) => {
-    await client.connect();
-    // re-salting/hashing new password
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(req.body.password, salt);
-
-    const updateResult = await users.updateOne(
-        //user id
-        {username:req.params.username},
-        //user info 
-        { $set: {
-            password: hash,
-            displayName: req.body.displayName,
-            message: req.body.message
-        }}
-    )
-    client.close();
-    res.redirect('/feed/'+req.params.user);
-};
-
 
 
 
@@ -205,17 +184,45 @@ exports.createPost = async (req, res) => {
     // CHANGE THIS REDIRECT TO SOMEWHERE ELSE
     res.redirect('/feed/'+post.user);
 };
-
-exports.editPostView = (req, res) => {
-    
-    res.render('editPost',{
-
+exports.editUserView = async (req, res) => {
+    await client.connect();
+    const user = await users.findOne({username: req.params.user});
+    res.render('settings',{
+        user:user
     })
 }
+exports.updateUser = async (req, res) => {
+    await client.connect();
+    // re-salting/hashing new password
+    let salt = bcrypt.genSaltSync(10);
+    let hash = bcrypt.hashSync(req.body.password, salt);
 
-exports.editPost = async (req, res) => {
+    const updateResult = await users.updateOne(
+        //user id
+        {username:req.params.user},
+        //user info 
+        { $set: {
+            password: hash,
+            displayName: req.body.displayName,
+            message: req.body.message
+        }}
+    )
+    client.close();
+    res.redirect('/user/'+req.params.user);
+};
+exports.editPostView = async (req, res) => {
     await client.connect();
     var x = Math.floor(req.params.postId);
+    const user = await users.findOne({username: req.params.user});
+    const result = await posts.findOne({postId:x})
+    res.render('editPost',{
+        post:result,
+        user:user
+    })
+}
+exports.editPost = async (req, res) => {
+    await client.connect();
+    var x = Math.floor(req.body.postId);
     const updateResult = await posts.updateOne(
         //post id instead
         {postId:x},
@@ -223,17 +230,16 @@ exports.editPost = async (req, res) => {
         { $set: {
             title: req.body.title,
             message: req.body.message
-        }}
+        }
+    }
     )
     client.close();
-    res.redirect('/feed/'+req.params.user);
+    res.redirect('/post/'+x+'/'+req.params.user);
 }
-
-
 exports.deletePost = async (req, res) => {
     await client.connect();
     var x = Math.floor(req.params.postId);
-    const deleteResult = await posts.deleteOne({postId:x});
+    const deleteResult = await posts.deleteOne({postId:x})
     client.close();
     res.redirect('/feed/'+req.params.user);
 };
