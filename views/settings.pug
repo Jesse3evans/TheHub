@@ -4,15 +4,13 @@ block content
         #margin-box(style='height:60vw')
             h1(style="text-align:center; margin-top:2.5vw") Edit User Information
             #addForm(style='position:relative;top:2vw;left:18vw; overflow-y: hidden;')
-                form(action="/editUser" method="post")
-                    h1 Username
-                    input(type='text' name="username")
+                form(action="/editUser/"+user.username method="post")
                     h1 Password
-                    input(type='text' name="password" )
+                    input(type='text' name="password")
                     h1 Display Name
-                    input(type='text' name ="displayName")
+                    input(type='text' name ="displayName" value=user.displayName)
                     h1 Status Message:            
-                    input(type='text' name="message")
+                    input(type='text' name="message" value= user.message)
                     <br>
                     <br>
                     input(id="submit" type="submit" value="Submit")

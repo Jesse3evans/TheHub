@@ -35,7 +35,7 @@ block content
             p User: #{post.user}
           #post
             p #{post.message}
-            form(action='/editPost/'+post.postId+'/'+post.user method="get") 
+            form(action='/editPostview/'+post.postId+'/'+post.user method="get") 
               input(type="submit" value="Edit")
             form(action='/deletePost/'+post.postId+'/'+post.user  method="get") 
               input(type="submit" value="Delete")

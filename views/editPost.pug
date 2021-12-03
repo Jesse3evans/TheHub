@@ -4,14 +4,14 @@ block content
     #margin-box(style='height:60vw')
       h1(style="text-align:center; margin-top:2.5vw") Edit Post
       #addForm(style='position:relative;top:2vw;left:18vw; overflow-y: hidden;')
-        form(action='/editPost' method="post")
-          input(style="display:none" type="text" name="postId" value= post.postId)
+        form(action='/editPost/'+user.username method="post")
+          input(style='display:none ' type="text" name="postId" value= post.postId)
           h1 Title
           input(type='text' name="title" value = post.title)
           h1 Message
-          textarea#message(type='text' name="message" value=post.message)
+          textarea#message(type='text' name="message") #{post.message}
           <br>
           <br>
           input(id="submit" type="submit" value="Edit") 
-      footer
+    footer
       h1 The Hub - Powered by the plug
