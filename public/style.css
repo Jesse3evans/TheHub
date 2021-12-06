@@ -456,3 +456,107 @@ input[type=text]{
     border: 1px solid #000;
     color:#000;
 }
+#content2{
+    height:35vw;
+    border:3px solid burlywood;
+    position: absolute;
+    top:9vw;
+    width:80%;
+    transition: .8s;
+    transition-delay: 1.2s;
+    left:10%;
+    background-color: #000;
+    transition-delay: 1s;
+    
+
+}
+#weatherBox{
+    position: absolute;
+    height:53%;
+    width:50.3%;
+    left:17.5vw;
+    overflow: hidden;
+    transition: .8s;
+    transition-delay: 2.2s;
+    top:6.5vw;
+    border:2px solid burlywood;
+    text-align: center;
+    border-radius: .6vw;
+    padding: 1vw;
+    background-color: rgba(204, 204, 204, 0.692);
+    
+}
+h3{
+    border-bottom: 2px solid #000;
+    padding:1vw;
+    margin-bottom: 1vw;
+    margin-left: 6.5%;
+    width:80%;
+}
+.show{
+    z-index: 1000!important;
+    opacity: 1!important;
+    padding: 1vw;
+    transition: .7s;
+    display:block!important;
+    transition-timing-function: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+#info-txt{
+    color:#000;
+    font-size: 1.4vw;
+    position: absolute;
+    padding :1vw;
+    top:-.7vw;
+    opacity: 1;
+}
+.h1-w{
+    margin-top: .5vw;;
+    border-bottom: 1px solid #000;
+}
+.h2-w{
+    
+    border-bottom: 1px solid #000;
+}
+.box-design{
+    text-align: center;
+    padding:.5vw;
+    height:8.8vw;
+    width:4.8vw;
+    font-size: .6vw;
+    position: absolute;
+    float: left;
+    color:#fff;
+    background-color: #000;
+    border-top:.8vw solid burlywood;
+    border-left: 2px solid burlywood;
+    border-right: 2px solid burlywood;
+    border-bottom: 2px solid burlywood;
+    border-top-left-radius: .5vw;
+    border-top-right-radius: .5vw;
+}
+
+#box-1{
+   left:1.5vw;
+    top:8vw;
+}
+#box-2{
+ top:8vw;
+ left:10vw;
+    
+}
+#box-3{
+   
+    top:8vw;
+ left:18.2vw; 
+}
+#box-4{
+    top:8vw;
+    left:26.4vw;
+    
+}
+#box-5{
+   
+    top:8vw;
+    left:34.4vw;
+  
+}
