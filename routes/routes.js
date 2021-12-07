@@ -254,6 +254,24 @@ exports.deletePost = async (req, res) => {
     await client.connect();
     var x = Math.floor(req.params.postId);
     const deleteResult = await posts.deleteOne({postId:x})
+    const filteredDocs = await posts.findOne({postId: i});
+    const postsResults = await (await posts.find({}).toArray());
+    var size = await (await posts.countDocuments()).valueOf();
+    var i =0;
+    for(i=0;i<postsResults.length;i++){
+        if(postsResults[i].postId!=i){
+            const updateResult = await posts.updateOne(
+                //post id instead
+                {postId:postsResults[i].postId},
+                //title and message 
+                { $set: {
+                    postId:i
+                }
+            })
+        }
+        
+
+    } 
     client.close();
     res.redirect('/feed/'+req.params.user);
 };
