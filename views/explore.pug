@@ -2,10 +2,9 @@ extends layout
 block content
     #addForm(style=" position:absolute;left:23.3vw;z-index:1;top:6vw; padding:2vw;border-radius:2%; ")
         h1(style="text-align:center") Search Users
-        form(action="/searchUsers" method="get" style="text-align:center")
-            input(style="width:30vw;margin-bottom:1vw" type="text" name="search")
-            i(type="submit" style=" position:relative;top:0.9vw;background-color:#ccc;padding:0.06vw" class="fa fa-search" aria-hidden="true")
-    #content(style="height:70vw; top:25vw; ")
+        form(action='/searchUsers/'+user.username method="post")
+            input(type='text' name="entry" style="width:60%;margin-right:2vw")
+            input(type='submit' value='Search')
         h1(style="text-align:center") Explore Users
         #margin-box(style=" height:50vw; border:1px solid white; border-radius:2%; ")
             #box
