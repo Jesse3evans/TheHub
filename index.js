@@ -3,6 +3,7 @@ const pug = require('pug');
 const path = require('path');
 const expressSession = require('express-session');
 const routes = require('./routes/routes.js');
+const port = process.env.PORT || 3000;
 
 
 const app = express();
@@ -22,7 +23,7 @@ const urlencodedParser = express.urlencoded({
 })
 
 const checkAuth = (req, res, next) => {
-    if (req.session.user && req.session.user.isAuthenticated){
+    if (req.session.user && req.session.user.isAuthenticated) {
         next();
     } else {
         res.redirect('/login');
@@ -43,12 +44,12 @@ app.get('/user/:mainUser/:otherUser', checkAuth, routes.otherProfile);
 app.post('/post', checkAuth, urlencodedParser, routes.createPost);
 app.get('/post/:id/:username', checkAuth, routes.viewPost);
 app.get('/post', checkAuth, routes.newPost);
-app.get('/deletePost/:postId/:user', checkAuth,routes.deletePost);
-app.get('/editPostView/:postId/:user', checkAuth ,routes.editPostView);
-app.get('/explore/:mainUser',checkAuth, routes.exploreUsers);
-app.post('/editPost/:user',checkAuth, urlencodedParser, routes.editPost);
+app.get('/deletePost/:postId/:user', checkAuth, routes.deletePost);
+app.get('/editPostView/:postId/:user', checkAuth, routes.editPostView);
+app.get('/explore/:mainUser', checkAuth, routes.exploreUsers);
+app.post('/editPost/:user', checkAuth, urlencodedParser, routes.editPost);
 app.post('/deletePost/:id/:username', checkAuth, routes.deletePost)
 app.post('/deleteUser/:username', routes.deleteUser)
-app.get('/editUserView/:user', checkAuth ,routes.editUserView);
-app.post('/editUser/:user',checkAuth, urlencodedParser, routes.updateUser);
-app.listen(3000);
+app.get('/editUserView/:user', checkAuth, routes.editUserView);
+app.post('/editUser/:user', checkAuth, urlencodedParser, routes.updateUser);
+app.listen(port);
