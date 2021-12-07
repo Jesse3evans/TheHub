@@ -275,7 +275,26 @@ exports.deletePost = async (req, res) => {
     client.close();
     res.redirect('/feed/'+req.params.user);
 };
+exports.searchUser = async (req, res) => {
+    await client.connect();
+    const searchResult = await users.find({username:new RegExp('.*' + req.body.entry + '.*')}).toArray();
+    console.log(req.body.entry)
+    const filteredDocs = await users.findOne({username: req.params.user})
+    client.close();
 
+    if(searchResult!=null){
+        res.render('explore',{
+            userArray: searchResult,
+            user: filteredDocs
+        });
+    }
+    else {
+        res.render('explore',{
+            userArray:[{}],
+            user:filteredDocs
+        });
+    }
+};
 exports.deleteUser = async (req, res) => {
     await client.connect();
     const deleteResult = await users.deleteOne(req.body.username)
