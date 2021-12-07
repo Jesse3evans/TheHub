@@ -194,19 +194,33 @@ exports.editUserView = async (req, res) => {
 exports.updateUser = async (req, res) => {
     await client.connect();
     // re-salting/hashing new password
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(req.body.password, salt);
 
-    const updateResult = await users.updateOne(
-        //user id
-        {username:req.params.user},
-        //user info 
-        { $set: {
-            password: hash,
-            displayName: req.body.displayName,
-            message: req.body.message
-        }}
-    )
+    if (req.body.password == ''){
+        const findResult = await users.find({ username: req.params.user }).toArray();
+        const updateResult = await users.updateOne(
+            //user id
+            {username:req.params.user},
+            //user info 
+            { $set: {
+                password: findResult[0].password,
+                displayName: req.body.displayName,
+                message: req.body.message
+            }}
+        )
+    } else {
+        let salt = bcrypt.genSaltSync(10);
+        let hash = bcrypt.hashSync(req.body.password, salt);
+        const updateResult = await users.updateOne(
+            //user id
+            {username:req.params.user},
+            //user info 
+            { $set: {
+                password: hash,
+                displayName: req.body.displayName,
+                message: req.body.message
+            }}
+        )
+    }
     client.close();
     res.redirect('/user/'+req.params.user);
 };
