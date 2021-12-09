@@ -314,7 +314,7 @@ exports.exploreUsers = async(req,res) =>{
     });
 }
 
-exports.weather = (req, res) => {
+exports.joke = (req, res) => {
     
 }
 

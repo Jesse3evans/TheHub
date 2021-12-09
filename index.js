@@ -59,5 +59,5 @@ app.post('/deleteUser/:username', routes.deleteUser)
 app.get('/editUserView/:user', checkAuth, routes.editUserView);
 app.post('/editUser/:user', checkAuth, urlencodedParser, routes.updateUser);
 app.post('/searchUsers/:user', checkAuth, urlencodedParser, routes.searchUser);
-app.get('/weather', routes.weather)
+app.get('/joke', routes.joke)
 app.listen(port);
