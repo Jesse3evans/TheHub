@@ -314,5 +314,9 @@ exports.exploreUsers = async(req,res) =>{
     });
 }
 
+exports.weather = (req, res) => {
+    
+}
+
 //look through array inside user object
 //within each friend 

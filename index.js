@@ -18,6 +18,12 @@ app.use(expressSession({
     resave: true
 }));
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Acess-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+    next();
+});
+
 const urlencodedParser = express.urlencoded({
     extended: false
 })
@@ -53,4 +59,5 @@ app.post('/deleteUser/:username', routes.deleteUser)
 app.get('/editUserView/:user', checkAuth, routes.editUserView);
 app.post('/editUser/:user', checkAuth, urlencodedParser, routes.updateUser);
 app.post('/searchUsers/:user', checkAuth, urlencodedParser, routes.searchUser);
+app.get('/weather', routes.weather)
 app.listen(port);
