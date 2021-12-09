@@ -5,13 +5,17 @@ block content
         form(action='/searchUsers/'+user.username method="post")
             input(type='text' name="entry" style="width:60%;margin-right:2vw")
             input(type='submit' value='Search')
+    #content(style="height:70vw; top:25vw; ")
         h1(style="text-align:center") Explore Users
         #margin-box(style=" height:50vw; border:1px solid white; border-radius:2%; ")
             #box
-                each users in userArray
-                    #userExplore
-                        img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
-                        a(href='/user/'+user.username+'/'+ users.username)
-                            h1 #{users.displayName}
+                if(userArray.length>0)
+                    each users in userArray
+                        #userExplore
+                            img#friendPic(src='https://www.personality-insights.com/wp-content/uploads/2017/12/default-profile-pic-e1513291410505.jpg')
+                            a(href='/user/'+user.username+'/'+ users.username)
+                                h1 #{users.username}
+                else 
+                    h1(style="text-align:center") No User Found
         footer
             h1 The Hub - Powered by the plug
