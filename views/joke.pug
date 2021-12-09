@@ -1,0 +1,15 @@
+extends layout 
+block content
+    #content(style='top:10vw;height:70vw')
+        #margin-box(style='height:auto')    
+            h1(style=' text-align: center;') Joke API
+            #post-header(style='top:2vw')
+                h1(style="background-color:#555") Joke: #{joke.jokeString}
+                p Category: #{joke.category}
+            #post(style='top:-3vw')
+                p Answer: #{joke.jokeAnswer}
+                img(src=joke.image width=350)
+        br
+        br 
+        footer
+            h1 The Hub - Powered by the plug
