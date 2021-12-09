@@ -314,12 +314,29 @@ exports.exploreUsers = async(req,res) =>{
     });
 }
 
-exports.joke = (req, res) => {
-    /*
-    var result =     // get json
-    */
-    res.render('joke', {
-        joke: joke,
-        punchline: punchline
-    });
+exports.joke = async(req, res) => {
+    await client.connect();
+    const url = 'https://damp-beach-41286.herokuapp.com/api?category=Computer+Joke&number=1';
+    const url1 = 'https://damp-beach-41286.herokuapp.com/api?category=Bad+Pun&number=1';
+    const url2 = 'https://damp-beach-41286.herokuapp.com/api?category=Yo+Mama+Joke&number=1';
+    const arry=[url,url1,url2];
+    const filteredDocs = await users.findOne({username: req.params.user});
+    const request = https.request(arry[getRandomInt(3)], (response) => {
+        let data = '';
+        response.on('data', (chunk) => {
+            data = data + chunk.toString();
+        });
+        response.on('end', () => {
+            let joke = JSON.parse(data); 
+            console.log()
+            res.render('joke', {
+                user:filteredDocs,
+                joke :joke[0],
+                
+            });
+          
+        });
+    })
+    request.end() 
+     
 }
