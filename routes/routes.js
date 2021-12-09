@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const url = 'mongodb+srv://ADMIN:Neumont@thehubusers.2xiyk.mongodb.net/Userbase?retryWrites=true&w=majority';
 
 const client = new MongoClient(url);
-
+const https = require('https');
 const dbName = 'Userbase';
 const db = client.db(dbName);
 const users = db.collection('Users');
@@ -313,7 +313,9 @@ exports.exploreUsers = async(req,res) =>{
         user: filteredDocs
     });
 }
-
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 exports.joke = async(req, res) => {
     await client.connect();
     const url = 'https://damp-beach-41286.herokuapp.com/api?category=Computer+Joke&number=1';
