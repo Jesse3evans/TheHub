@@ -317,8 +317,6 @@ exports.exploreUsers = async(req,res) =>{
 exports.joke = (req, res) => {
     /*
     var result =     // get json
-    var joke =       // get jokeString from result
-    var punchline =  // get jokeAnswer from result
     */
     res.render('joke', {
         joke: joke,
